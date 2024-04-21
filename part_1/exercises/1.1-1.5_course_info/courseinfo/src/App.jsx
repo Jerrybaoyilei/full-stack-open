@@ -55,12 +55,4 @@ const App = () => {
   )
 }
 
-const Header = (course) => {
-  return (
-    <h1>
-      {course}
-    </h1>
-  )
-}
-
 export default App
