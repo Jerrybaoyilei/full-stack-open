@@ -14,14 +14,18 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
 
-  const nextAnecdote = () => selected < anecdotes.length - 1 && setSelected(selected + 1)
-  const previousAnecdote = () => selected > 0 && setSelected(selected - 1)
+  const nextAnecdote = () => {
+    var newIndex = Math.floor(Math.random() * anecdotes.length)
+    while (newIndex === selected) {
+      newIndex = Math.floor(Math.random() * anecdotes.length)
+    }
+    setSelected(newIndex)
+  }
 
   return (
     <div>
       <div>
-        <button onClick={previousAnecdote}>previous</button>
-        <button onClick={nextAnecdote}>next</button>
+        <button onClick={nextAnecdote}>next anecdote</button>
       </div>
       <div>
         {anecdotes[selected]}
