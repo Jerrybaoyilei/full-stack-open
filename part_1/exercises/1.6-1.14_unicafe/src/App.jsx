@@ -46,7 +46,6 @@ const Statistics = ({ good, neutral, bad }) => {
         <StatisticLine text="all" value={all}></StatisticLine>
         <StatisticLine text="average" value={average}></StatisticLine>
         <StatisticLine text="positive" value={positivePercentage}></StatisticLine>
-
       </div>
     )
   } else {
@@ -60,10 +59,10 @@ const Statistics = ({ good, neutral, bad }) => {
 
 const StatisticLine = ({ text, value }) => {
   return (
-    <div>
-      <span>{text} </span>
-      <span>{value}</span>
-    </div>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
