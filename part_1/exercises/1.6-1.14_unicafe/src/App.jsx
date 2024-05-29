@@ -12,13 +12,19 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <div>
-        <button onClick={handleGood}>good</button>
-        <button onClick={handleNeutral}>neutral</button>
-        <button onClick={handleBad}>bad</button>
-      </div>
+      <Button handleGood={handleGood} handleNeutral={handleNeutral} handleBad={handleBad}></Button>
       <h1>statistics</h1>
       <Statistics good={good} neutral={neutral} bad={bad}></Statistics>
+    </div>
+  )
+}
+
+const Button = ({ handleGood, handleNeutral, handleBad }) => {
+  return (
+    <div>
+      <button onClick={handleGood}>good</button>
+      <button onClick={handleNeutral}>neutral</button>
+      <button onClick={handleBad}>bad</button>
     </div>
   )
 }
@@ -26,35 +32,21 @@ const App = () => {
 const Statistics = ({ good, neutral, bad }) => {
 
   const all = good + neutral + bad
+  const average = all / 3
+  const positive = good / all
+  const positivePercentage = positive.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 3 })
 
   if (all > 0) {
     return (
 
       <div>
-        <div>
-          <span>good </span>
-          <span>{good}</span>
-        </div>
-        <div>
-          <span>neutral </span>
-          <span>{neutral}</span>
-        </div>
-        <div>
-          <span>bad </span>
-          <span>{bad}</span>
-        </div>
-        <div>
-          <span>all </span>
-          <span>{good + neutral + bad}</span>
-        </div>
-        <div>
-          <span>average </span>
-          <span>{all / 3}</span >
-        </div>
-        <div>
-          <span>positive </span>
-          <span>{good / all * 100}%</span>
-        </div>
+        <StatisticLine text="good" value={good}></StatisticLine>
+        <StatisticLine text="nenutral" value={neutral}></StatisticLine>
+        <StatisticLine text="bad" value={bad}></StatisticLine>
+        <StatisticLine text="all" value={all}></StatisticLine>
+        <StatisticLine text="average" value={average}></StatisticLine>
+        <StatisticLine text="positive" value={positivePercentage}></StatisticLine>
+
       </div>
     )
   } else {
@@ -64,7 +56,15 @@ const Statistics = ({ good, neutral, bad }) => {
       </div>
     )
   }
+}
 
+const StatisticLine = ({ text, value }) => {
+  return (
+    <div>
+      <span>{text} </span>
+      <span>{value}</span>
+    </div>
+  )
 }
 
 
