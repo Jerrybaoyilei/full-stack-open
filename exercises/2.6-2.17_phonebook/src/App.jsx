@@ -14,6 +14,7 @@ const App = () => {
     personService
       .getAll()
       .then(response => setPersons(response))
+    console.log(persons)
   }, [])
 
   const addNewPerson = (event) => {
@@ -35,6 +36,16 @@ const App = () => {
         setNewName('John Appleseed')
         setNewNumber('123-456-7890')
       })
+    }
+  }
+
+  const deletePerson = (id) => {
+    const personToDelete = persons.find(person => person.id === id)
+    console.log(personToDelete)
+    if (window.confirm(`Delete ${personToDelete.name}?`)) {
+      personService
+        .remove(id)
+      setPersons(persons.filter(person => person.id !== id))
     }
   }
 
@@ -62,7 +73,7 @@ const App = () => {
         handleNumberChange={handleNumberChange}
         addNewPerson={addNewPerson}></AddNew>
       <h2>Numbers</h2>
-      <Number persons={persons} searchKey={searchKey}></Number>
+      <Number persons={persons} searchKey={searchKey} deletePerson={deletePerson}></Number>
     </div>
   )
 }

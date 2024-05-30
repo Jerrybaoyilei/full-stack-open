@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": "1"
-    },
-    {
       "name": "Ada Lovelace",
       "number": "39-44-5323523",
       "id": "2"
@@ -24,11 +19,6 @@
       "id": "123d",
       "name": "John Appleseed",
       "number": "123-456-7890"
-    },
-    {
-      "id": "6192",
-      "name": "John Appleseed II",
-      "number": "123-456-7891"
     }
   ]
 }

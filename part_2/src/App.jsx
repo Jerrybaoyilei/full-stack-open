@@ -12,6 +12,7 @@ const App = () => {
       .getAll()
       .then(response => {
         setNotes(response)
+        console.log(notes)
       })
   }, [])
 

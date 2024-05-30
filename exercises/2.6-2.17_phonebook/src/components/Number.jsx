@@ -1,11 +1,26 @@
-const Number = ({ persons, searchKey }) => {
+const Number = ({ persons, searchKey, deletePerson }) => {
   return (
     <div>
       {
         searchKey ?
           persons.filter(person => person.name.includes(searchKey))
-            .map(person => <p key={person.name}>{person.name} {person.number}</p>)
-          : persons.map(person => <p key={person.name}>{person.name} {person.number}</p>)
+            .map(person => {
+              return (
+                <div>
+                  {person.name} {person.number}
+                  <button key={person.name} onClick={() => deletePerson(person.id)}>delete</button>
+                </div>
+              )
+            })
+          : persons.map(person => {
+            return (
+              <div key={person.name}>
+                {person.name} {person.number}
+                <button onClick={() => deletePerson(person.id)}>delete</button>
+              </div>
+            )
+          }
+          )
       }
     </div>
   )
