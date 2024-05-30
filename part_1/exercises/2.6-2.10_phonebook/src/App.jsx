@@ -46,12 +46,15 @@ const App = () => {
 
   return (
     <div>
+      <h2>Phonebook</h2>
       <Filter searchKey={searchKey} handleSearchKey={handleSearchKey}></Filter>
+      <h2>Add A New</h2>
       <AddNew newName={newName}
         handleNameChange={handleNameChange}
         newNumber={newNumber}
         handleNumberChange={handleNumberChange}
         addNewPerson={addNewPerson}></AddNew>
+      <h2>Numbers</h2>
       <Number persons={persons} searchKey={searchKey}></Number>
     </div>
   )
