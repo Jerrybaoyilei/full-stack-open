@@ -10,9 +10,9 @@ const Course = ({ name, parts }) => {
 
 const Header = ({ name }) => {
   return (
-    <h1>
+    <h2>
       {name}
-    </h1>
+    </h2>
   )
 }
 
@@ -33,7 +33,9 @@ const Total = ({ parts }) => {
     (accumulator, currentPart) => accumulator + currentPart.exercises, initValue
   )
   return (
-    <p>Total number of exercises: {sumOfExercises}</p>
+    <p>
+      <b>Total of {sumOfExercises} exercises</b>
+    </p>
   )
 }
 
