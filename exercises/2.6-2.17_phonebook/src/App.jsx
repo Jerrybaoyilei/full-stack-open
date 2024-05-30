@@ -19,18 +19,26 @@ const App = () => {
 
   const addNewPerson = (event) => {
     event.preventDefault()
-    if (persons.findIndex(person => person.name === newName) !== -1) {
-      alert(`Person with name ${newName} is already added to phonebook`)
-
-    }
-    else if (persons.findIndex(person => person.number === newNumber) !== -1) {
-      alert(`Person with number ${newNumber} is already added to phonebook`)
+    const oldPerson = persons.find(person => person.name === newName)
+    if (oldPerson) {
+      if (oldPerson.number === newNumber) {
+        alert(`The exact same person is already in the phonebook`)
+      } else {
+        const newPerson = {
+          name: newName,
+          number: newNumber
+        }
+        personService.updateNumber(oldPerson.id, newPerson).then(response => {
+          setPersons(persons.map(person => person.id !== oldPerson.id ? person : response))
+          setNewName('John Appleseed')
+          setNewNumber('123-456-7890')
+        })
+      }
     } else {
       const newPerson = {
         name: newName,
         number: newNumber
       }
-
       personService.create(newPerson).then(response => {
         setPersons(persons.concat(response))
         setNewName('John Appleseed')
