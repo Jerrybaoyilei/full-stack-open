@@ -101,7 +101,6 @@ const App = () => {
 
   const handleSearchKey = (event) => {
     setSearchKey(event.target.value)
-
   }
 
   return (
