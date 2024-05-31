@@ -1,4 +1,9 @@
-const findCountries = ({ searchKey, countries }) => {
-  const allNames = countries.map(country => country.name.common)
-  // const matchingNames = allNames.filter(country => country.)
+const FindCountries = ({ searchKey, handleSearchKey }) => {
+  return (
+    <div>
+      find countries <input value={searchKey} onChange={handleSearchKey} />
+    </div>
+  )
 }
+
+export default FindCountries
