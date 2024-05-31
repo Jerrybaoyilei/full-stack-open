@@ -1,11 +1,13 @@
-const Notification = ({ message }) => {
+const Notification = ({ message, isError }) => {
   if (message === null) {
     return null
   }
 
   return (
-    <div className="success">
-      {message}
+    <div>
+      <div className={`notification ${isError ? 'error' : 'success'}`}>
+        {message}
+      </div>
     </div>
   )
 }

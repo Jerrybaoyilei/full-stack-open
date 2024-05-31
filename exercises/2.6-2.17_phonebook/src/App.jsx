@@ -10,7 +10,8 @@ const App = () => {
   const [newName, setNewName] = useState('John Appleseed')
   const [newNumber, setNewNumber] = useState('123-456-7890')
   const [searchKey, setSearchKey] = useState('')
-  const [successMessage, setSuccessMessage] = useState(null)
+  const [notification, setNotification] = useState(null)
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     personService
@@ -31,15 +32,24 @@ const App = () => {
       } else {
 
         if (confirm(`${newPerson.name} is already added to the phonebook, replace the old number with a new one?`)) {
-          personService.updateNumber(oldPerson.id, newPerson).then(response => {
-            setPersons(persons.map(person => person.id !== oldPerson.id ? person : response))
-            setNewName('John Appleseed')
-            setNewNumber('123-456-7890')
-            setSuccessMessage(`Number changed to ${newPerson.number} for ${newPerson.name}`)
-            setTimeout(() => {
-              setSuccessMessage(null)
-            }, 5000)
-          })
+          personService.updateNumber(oldPerson.id, newPerson)
+            .then(response => {
+              setPersons(persons.map(person => person.id !== oldPerson.id ? person : response))
+              setNewName('John Appleseed')
+              setNewNumber('123-456-7890')
+              setIsError(false)
+              setNotification(`Number changed to ${newPerson.number} for ${newPerson.name}`)
+              setTimeout(() => {
+                setNotification(null)
+              }, 5000)
+            })
+            .catch(error => {
+              setIsError(true)
+              setNotification(`Information of ${oldPerson.name} has already been removed from server`)
+              setTimeout(() => {
+                setNotification(null)
+              }, 5000)
+            })
         }
       }
     } else {
@@ -47,9 +57,10 @@ const App = () => {
         setPersons(persons.concat(response))
         setNewName('John Appleseed')
         setNewNumber('123-456-7890')
-        setSuccessMessage(`Added ${newPerson.name}`)
+        setIsError(false)
+        setNotification(`Added ${newPerson.name}`)
         setTimeout(() => {
-          setSuccessMessage(null)
+          setNotification(null)
         }, 5000)
       })
 
@@ -61,6 +72,21 @@ const App = () => {
     if (window.confirm(`Delete ${personToDelete.name}?`)) {
       personService
         .remove(id)
+        .then(response => {
+          setIsError(false)
+          setNotification(`Successfully deleted ${personToDelete.name}`)
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000)
+          setPersons(persons.filter(person => person.id !== response.id))
+        })
+        .catch(error => {
+          setIsError(true)
+          setNotification(`Information of ${personToDelete.name} has already been removed from server`)
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000)
+        })
       setPersons(persons.filter(person => person.id !== id))
     }
   }
@@ -81,7 +107,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Noticication message={successMessage} />
+      <Noticication message={notification} isError={isError} />
       <Filter searchKey={searchKey} handleSearchKey={handleSearchKey}></Filter>
       <h2>Add A New</h2>
       <AddNew newName={newName}
