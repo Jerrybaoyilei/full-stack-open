@@ -1,7 +1,7 @@
 import ShowCountriesList from "./showCountriesList"
 import ShowSingleCountry from "./showSingleCountry"
 
-const ShowCountries = ({ searchKey, countries }) => {
+const ShowCountries = ({ searchKey, countries, handleShowCountry }) => {
   if (!searchKey) {
     return null
   }
@@ -19,7 +19,7 @@ const ShowCountries = ({ searchKey, countries }) => {
         </div>
       )
     } else if (matchedCountries.length > 1) {
-      return <ShowCountriesList matchedCountries={matchedCountries} />
+      return <ShowCountriesList matchedCountries={matchedCountries} handleShowCountry={handleShowCountry} />
     } else {
       const matchedCountry = matchedCountries[0]
       if (matchedCountry) {

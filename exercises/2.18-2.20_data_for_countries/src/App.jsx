@@ -21,11 +21,15 @@ function App() {
     setSearchKey(event.target.value)
   }
 
+  const handleShowCountry = ({ country }) => {
+    setSearchKey(country)
+  }
+
   return (
     <div>
       <FindCountries searchKey={searchKey} handleSearchKey={handleSearchKey} />
       <div>
-        <ShowCountries searchKey={searchKey} countries={countries} />
+        <ShowCountries searchKey={searchKey} countries={countries} handleShowCountry={handleShowCountry} />
       </div>
     </div>
   )
