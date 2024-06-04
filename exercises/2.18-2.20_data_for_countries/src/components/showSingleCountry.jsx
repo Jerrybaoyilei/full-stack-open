@@ -6,12 +6,10 @@ const ShowSingleCountry = ({ matchedCountry }) => {
 
   const [weatherData, setWeatherData] = useState(null)
 
-
-
   useEffect(() => {
     const lat = matchedCountry.capitalInfo.latlng[0]
     const lon = matchedCountry.capitalInfo.latlng[1]
-    const apiKey = "1fb542e629d8b34fc79e0e268c730b08"
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY
     WeatherService
       .getWeather({ lat, lon, apiKey })
       .then(response => {
