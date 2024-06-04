@@ -25,12 +25,11 @@ function App() {
     setSearchKey(country)
   }
 
+
   return (
     <div>
       <FindCountries searchKey={searchKey} handleSearchKey={handleSearchKey} />
-      <div>
-        <ShowCountries searchKey={searchKey} countries={countries} handleShowCountry={handleShowCountry} />
-      </div>
+      <ShowCountries searchKey={searchKey} countries={countries} handleShowCountry={handleShowCountry} />
     </div>
   )
 }
